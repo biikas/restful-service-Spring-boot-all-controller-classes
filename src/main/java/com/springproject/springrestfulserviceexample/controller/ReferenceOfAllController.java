@@ -3,8 +3,12 @@ package com.springproject.springrestfulserviceexample.controller;
 
 //import org.springframework.beans.factory.annotation.Value;
 //import com.sun.org.apache.xpath.internal.operations.String;
+import com.springproject.springrestfulserviceexample.model.Student;
 import lombok.extern.slf4j.Slf4j;
         import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RequestMapping(value="home")
@@ -39,11 +43,12 @@ public class ReferenceOfAllController {
         return sub;
     }
 
-//    @RequestMapping(value = "stu",method = RequestMethod.POST)
-//    @PostMapping(value ="stu")
-//    public String displayDetails(@RequestBody Student student){
-//
-//        return student.getFirstname()+student.getLastname();
+    @RequestMapping(value = "stu",method = RequestMethod.POST)
+    //@PostMapping(value ="stu")
+    public String displayDetails(@RequestBody Student student){
+        String s =student.getFirstname()+student.getLastname();
+        return s;
+    }
 
 //    http://localhost:8081/home/subtract/num1/num2
 
@@ -74,5 +79,26 @@ public class ReferenceOfAllController {
     @RequestMapping(value = "greet2",method = RequestMethod.GET)
     public String greet2(@RequestParam(name ="name" ,defaultValue = "hari")String name){
         return "welcome " +name;
+    }
+
+    //returning object
+    //http://localhost:8081/home/object
+    @GetMapping(value = "object")
+    public Student displayObject(){
+        Student student= new Student();
+        student.setFirstname("Bikash");
+        student.setLastname("Shah");
+        return student;
+    }
+
+    @GetMapping(value = "array")
+    public List<Student> displayArrayObject(){
+        Student student= new Student();
+        student.setFirstname("Bikash");
+        student.setLastname("Shah");
+
+        List<Student> students= new ArrayList<>();
+        students.add(student);
+        return students;
     }
 }
